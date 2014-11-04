@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 # Make sure a password is set IMAGE-459
-describe command("cat /etc/shadow | grep root | awk -F':' '{print $2;}'") do
+describe command("cat /etc/master.passwd | grep Charlie | awk -F':' '{print $2;}'") do
   it { should_not return_stdout "" }
 end
 
