@@ -7,11 +7,11 @@ describe package('curl') do
   it { should be_installed }
 end
 
-escribe package('node') do
+describe package('node') do
   it { should be_installed }
 end
 
-escribe package('npm') do
+describe package('npm') do
   it { should be_installed }
 end
 
