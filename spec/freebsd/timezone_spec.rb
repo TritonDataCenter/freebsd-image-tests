@@ -1,7 +1,6 @@
 require 'spec_helper'
 
-describe file('/etc/localtime') do
-	it { should be_file }
-  its(:content) { should match /UTC/ }
+describe command('date +%z') do
+	its(:stdout) { should match /\+0000/ }
 end
 
