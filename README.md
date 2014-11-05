@@ -1,6 +1,6 @@
 # Overview
 
-These are the tests used to validate images before being released to the Joyent Public Cloud.
+These are the tests used to validate FreeBSD KVM images before being released to the images.joyent.com and the Joyent Public Cloud.
 
 These tests are are based on [Serverspec](http://serverspec.org) "Serverspec.org").
 
@@ -17,18 +17,18 @@ Add the name and attibutes of what you want to test to attributes.yml. Next, edi
 For example, here's a attrubutes.yml file:
 
 ``
-base-13.3.1:
+freebsd-10:
   :roles:
-    - base-common
-  :name: base
-  :base_version: 13.3.1
-  :doc_url: http://wiki.joyent.com/jpc2/SmartMachine+Base
+    - freebsd
+  :name: FreeBSD 10
+  :base_version: 20141105
+  :doc_url: http://wiki.joyent.com/jpc2/Freebsd
 ``
 
 And an example `~/.ssh/config` file:
 
 ``
-Host base-13.3.1 
+freebsd-10 
   HostName XX.X.XXX.XXX
   User root
 ``
