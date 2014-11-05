@@ -14,5 +14,5 @@ end
 
 describe file('/etc/ssh/sshd_config') do
   it { should be_file }
-  it { should contain "PermitRootLogin yes" }
+  it { should contain "PermitRootLogin without-password" }
 end
