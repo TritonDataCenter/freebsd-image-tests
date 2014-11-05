@@ -2,7 +2,7 @@
 
 These are the tests used to validate FreeBSD KVM images before being released to the images.joyent.com and the Joyent Public Cloud.
 
-These tests are are based on [Serverspec](http://serverspec.org) "Serverspec.org").
+These tests are are based on [Serverspec](http://serverspec.org).
 
 ## Installation and Setup
 
