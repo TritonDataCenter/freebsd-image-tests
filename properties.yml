@@ -2,6 +2,6 @@ freebsd:
   :roles:
     - freebsd
   :name: FreeBSD 10.0
-  :version: 20141104
+  :version: 20141111
   :doc_url: http://wiki.joyent.com/jpc2/Freebsd
 
