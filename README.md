@@ -4,6 +4,8 @@ These are the tests used to validate FreeBSD KVM images before being released to
 
 These tests are are based on [Serverspec](http://serverspec.org).
 
+This test suite is used in conjunction with [mi-freebsd-10](https://github.com/joyent/mi-freebsd-10)
+
 ## Installation and Setup
 
 To run the tests you will need ruby (1.9.3+ or 2.0.0 should work) and rubygems installed.
