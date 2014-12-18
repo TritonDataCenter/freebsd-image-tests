@@ -18,28 +18,30 @@ Add the name and attibutes of what you want to test to attributes.yml. Next, edi
 
 For example, here's a attrubutes.yml file:
 
-``
+```
 freebsd-10:
   :roles:
     - freebsd
   :name: FreeBSD 10
   :base_version: 20141105
   :doc_url: http://wiki.joyent.com/jpc2/Freebsd
-``
+```
 
 And an example `~/.ssh/config` file:
 
-``
+```
 freebsd-10 
   HostName XX.X.XXX.XXX
   User root
-``
+```
 
 ## Running the tests
 
 To run the tests, run the following command (within this directory):
 
-`rake serverspec`
+```
+rake serverspec
+```
 
 More information on how to create serverspec tests can be found here:
 
