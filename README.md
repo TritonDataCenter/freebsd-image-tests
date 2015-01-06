@@ -6,6 +6,8 @@ These tests are are based on [Serverspec](http://serverspec.org).
 
 This test suite is used in conjunction with [mi-freebsd-10](https://github.com/joyent/mi-freebsd-10)
 
+*Note*: These tests are not yet compatible with Serverspec V2
+
 ## Installation and Setup
 
 To run the tests you will need ruby (1.9.3+ or 2.0.0 should work) and rubygems installed.
