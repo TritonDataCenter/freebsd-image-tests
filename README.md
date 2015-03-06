@@ -1,6 +1,6 @@
 # Overview
 
-These are the tests used to validate FreeBSD KVM images before being released to the images.joyent.com and the Joyent Public Cloud.
+These are the tests used to validate FreeBSD KVM images before being released to the images.joyent.com and the Joyent Public Cloud and images.joyent.com.
 
 These tests are are based on [Serverspec](http://serverspec.org).
 
@@ -14,36 +14,38 @@ To run the tests you will need ruby (1.9.3+ or 2.0.0 should work) and rubygems i
 
 Install serverspec with
 
-`gem install serverspec`
+    gem install serverspec
 
-Add the name and attibutes of what you want to test to attributes.yml. Next, edit your `~/.ssh/config` file with the host information of the virtual machines you want to test. The name you chose for _Host_ in `~/.ssh/config should match what you have in attributes.yml. 
+Copy the `properties_example.yml` file to `properties.yml`
 
-For example, here's a attrubutes.yml file:
+Modify `properties.yml` with the name and properties you want to test. 
 
-```
-freebsd-10:
-  :roles:
-    - freebsd
-  :name: FreeBSD 10
-  :base_version: 20141105
-  :doc_url: http://wiki.joyent.com/jpc2/Freebsd
-```
+Next, edit your `~/.ssh/config` file with the host information of the virtual machines you want to test. The name you chose for _Host_ in `~/.ssh/config` should match what you have in `properties.yml`. 
+
+For example, here's a `properties.yml` file:
+
+    freebsd-10:
+      :roles:
+        - freebsd
+      :name: FreeBSD 10
+      :base_version: 20141105
+      :doc_url: http://wiki.joyent.com/jpc2/Freebsd
 
 And an example `~/.ssh/config` file:
 
-```
-freebsd-10 
-  HostName XX.X.XXX.XXX
-  User root
-```
+    freebsd-10 
+      HostName XX.X.XXX.XXX
+      User root
 
 ## Running the tests
 
 To run the tests, run the following command (within this directory):
 
-```
-rake serverspec
-```
+    rake serverspec
+
+Or just:
+
+    rake
 
 More information on how to create serverspec tests can be found here:
 
