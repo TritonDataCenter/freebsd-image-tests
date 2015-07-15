@@ -6,19 +6,19 @@ require 'spec_helper'
 # Test to ensure the VM has two interfaces, eth0 and eth1
 
 # eth0
-describe interface('eth0') do
+describe interface('vtnet0') do
   it { should exist }
 end
 
-describe interface('eth0') do
+describe interface('vtnet0') do
   it { should be_up }
 end
 
 # eth1
-describe interface('eth1') do
+describe interface('vtnet1') do
   it { should exist }
 end
 
-describe interface('eth1') do
+describe interface('vtnet1') do
   it { should be_up }
 end
