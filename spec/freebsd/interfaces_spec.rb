@@ -10,15 +10,7 @@ describe interface('vtnet0') do
   it { should exist }
 end
 
-describe interface('vtnet0') do
-  it { should be_up }
-end
-
 # eth1
 describe interface('vtnet1') do
   it { should exist }
-end
-
-describe interface('vtnet1') do
-  it { should be_up }
 end
