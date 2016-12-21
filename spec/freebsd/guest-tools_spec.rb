@@ -53,3 +53,8 @@ describe file('/lib/smartdc/set-rootpassword') do
   it { should be_file }
   it { should be_executable }
 end
+
+describe file('/lib/smartdc/triton') do
+  it { should be_file }
+  it { should be_executable }
+end
