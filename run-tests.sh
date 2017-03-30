@@ -100,7 +100,8 @@ get_image_details() {
 }
 
 choose_package() {
-    PACKAGE=$(triton -p ${PROFILE} package list -H memory=768 -o id | head -1)
+    #PACKAGE=$(triton -p ${PROFILE} package list -H memory=768 -o id | head -1)
+    PACKAGE=k4-highcpu-kvm-3.75G
     echo "Using package:"
     echo "    $PACKAGE"
     echo ""
