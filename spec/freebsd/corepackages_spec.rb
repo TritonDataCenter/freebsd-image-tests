@@ -15,7 +15,7 @@ describe package('npm') do
   it { should be_installed }
 end
 
-describe package('vim') do
+describe package('vim-lite') do
   it { should be_installed }
 end
 
