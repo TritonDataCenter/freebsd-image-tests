@@ -2,7 +2,7 @@ require 'spec_helper'
 
 
 # Make sure /etc/rc.conf has approriate settings
-if property[:name].include? "FreeBSD 10.0"
+if property[:name].include? "FreeBSD 10"
   describe file('/etc/rc.conf') do
     it { should be_file }
     it { should contain "fsck_y_enable=\"YES\"" }

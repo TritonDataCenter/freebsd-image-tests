@@ -17,7 +17,7 @@ describe file('/lib/smartdc/format-secondary-disk') do
   it { should be_executable }
 end
 
-if property[:name].include? "FreeBSD 10.0"
+if property[:name].include? "FreeBSD 10"
   describe file('/lib/smartdc/lib_smartdc_scripts.cfg') do
     it { should be_file }
     it { should be_executable }
@@ -54,7 +54,7 @@ describe file('/lib/smartdc/set-rootpassword') do
   it { should be_executable }
 end
 
-if property[:name].include? "FreeBSD 11.0"
+if property[:name].include? "FreeBSD 11"
   describe file('/lib/smartdc/triton') do
     it { should be_file }
     it { should be_executable }

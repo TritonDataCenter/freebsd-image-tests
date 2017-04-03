@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 # Test for user-data. This needs to be set on the test VM.
-if property[:name].include? "FreeBSD 10.0"
+if property[:name].include? "FreeBSD 10"
   describe file('/var/db/mdata-user-data') do
     it { should be_file }
     it { should_not be_executable }

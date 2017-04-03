@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-if property[:name].include? "FreeBSD 10.0"
+if property[:name].include? "FreeBSD 10"
   describe file('/var/tmp/user-script') do
     it { should be_file }
     it { should be_owned_by 'root' }
