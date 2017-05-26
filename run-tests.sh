@@ -15,31 +15,31 @@ cat <<EOF
 
 Setup test instances and run tests for given image.
 
-Note: This script assumes you have the triton cli command tool setup with a 
+Note: This script assumes you have the triton cli command tool setup with a
       profile for your test environment.
 
 This script will:
 
-    - Create a test instance of the given image with user-script, user-data, 
+    - Create a test instance of the given image with user-script, user-data,
       a public IP and private IP.
     - Create a custom image of the test instance.
     - Create a test instance from the custom image.
     - Run tests on the above instances.
 
     Usage:
-    
+
         $0 -i <IMAGE> -p <PROFILE> -n <PROPER_NAME>
-        
+
     Example:
-    
+
         $0 -i dd31507e-031e-11e6-be8a-8f2707b5b3ee -p testing-dc -n "FreeBSD 11.0"
-        
+
     Options:
-    
+
         -i The image you want to test. Can be UUID or image name.
         -p The profile you wish to use. This assumes you have the triton
            CLI tool setup with your desired profile.
-        -n The name of the image. This is the proper name found in the 
+        -n The name of the image. This is the proper name found in the
            motd and /etc/product files. Should be in quotes.
         -h Show this message
 
@@ -101,7 +101,7 @@ get_image_details() {
 
 choose_package() {
     #PACKAGE=$(triton -p ${PROFILE} package list -H memory=768 -o id | head -1)
-    PACKAGE=k4-highcpu-kvm-3.75G
+    PACKAGE=k4-highcpu-kvm-750M
     echo "Using package:"
     echo "    $PACKAGE"
     echo ""
@@ -109,15 +109,15 @@ choose_package() {
 
 get_networks() {
 	echo "Getting networks:"
-    
+
     PUBLIC_NETWORK=$(triton -p ${PROFILE} network list -j | json -ag id -c 'this.public === true' | head -1)
 	PRIVATE_NETWORK=$(triton -p ${PROFILE} network list -j | json -ag id -c 'this.public === false' -c 'this.fabric !== true' | head -1)
-    
+
     # Trying using a fabric network instead
     if [[ -z "$PRIVATE_NETWORK" ]]; then
         PRIVATE_NETWORK=$(triton -p ${PROFILE} network list -j | json -ag id -c 'this.public === false' | head -1)
     fi
-    
+
     echo "    Public:  $PUBLIC_NETWORK"
     echo "    Private: $PRIVATE_NETWORK"
     echo ""
@@ -136,11 +136,11 @@ USERSCRIPT
 cat <<USERDATA >user-data
 This is user-data!
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor 
-incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis 
-nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
-Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore 
-eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt 
+Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
+nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore
+eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt
 in culpa qui officia deserunt mollit anim id est laborum.
 USERDATA
 
@@ -174,7 +174,7 @@ wait_for_ssh() {
         sleep 1
         COUNT=$((COUNT+1))
     done
-    
+
     if [[ "$COUNT" -ge 60 ]]; then
       echo "ssh timed out after ~60 seconds"
       exit 1
@@ -184,7 +184,7 @@ wait_for_ssh() {
 
 test_image() {
     local INST_NAME=$1
-    
+
 cat <<PROPYML >properties.yml
 $INST_NAME:
   :roles:
@@ -229,10 +229,10 @@ delete_image() {
 
 cleanup() {
     echo "Cleaning up."
-    
+
     rm -rf userscript.sh
     rm -rf user-data
-    
+
     unset TARGET_HOST_NAME
     unset TARGET_USER_NAME
     echo "Done."
@@ -243,15 +243,15 @@ get_image_details $IMAGE
 choose_package
 get_networks
 
-INSTACE_NAME=${IMAGENAME}-${VERSION}-${DATE}
+INSTANCE_NAME=${IMAGENAME}-${VERSION}-${DATE}
 
-create_instance $IMAGE $INSTACE_NAME
-wait_for_IP $INSTACE_NAME
-wait_for_ssh $INSTACE_NAME
+create_instance $IMAGE $INSTANCE_NAME
+wait_for_IP $INSTANCE_NAME
+wait_for_ssh $INSTANCE_NAME
 
-test_image $INSTACE_NAME
+test_image $INSTANCE_NAME
 
-create_custom_image $INSTACE_NAME
+create_custom_image $INSTANCE_NAME
 
 get_image_details $IMAGENAME-CUST
 choose_package
@@ -267,8 +267,8 @@ wait_for_ssh $CUSTOM_INSTANCE_NAME
 test_image $CUSTOM_INSTANCE_NAME
 
 echo "Deleting instance and custom image"
-ssh-keygen -q -R $(triton inst ip $INSTACE_NAME)
-delete_instance $INSTACE_NAME
+ssh-keygen -q -R $(triton inst ip $INSTANCE_NAME)
+delete_instance $INSTANCE_NAME
 ssh-keygen -q -R $(triton inst ip $CUSTOM_INSTANCE_NAME)
 delete_instance $CUSTOM_INSTANCE_NAME
 delete_image $IMAGENAME
